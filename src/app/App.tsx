@@ -1,0 +1,105 @@
+import { useMemo, useState } from 'react';
+import Module1App from '../modules/module1/App';
+import Module2App from '../modules/module2/App';
+import Module3App from '../modules/module3/App';
+import Module4App from '../modules/module4/App';
+import Module5App from '../modules/module5/ModuleIndex';
+import { LandingPage } from './components/LandingPage';
+import { Sparkles, Home, FileText, GraduationCap, Users, LayoutDashboard, ChevronRight, PenTool } from 'lucide-react';
+
+type ModuleKey = 'home' | 'module1' | 'module2' | 'module3' | 'module4' | 'module5';
+
+const modules: Array<{ key: ModuleKey; label: string; icon: any }> = [
+  { key: 'module1', label: 'Resume Analyzer', icon: FileText },
+  { key: 'module5', label: 'Resume Editor', icon: PenTool },
+  { key: 'module2', label: 'Prep Hub', icon: GraduationCap },
+  { key: 'module3', label: 'Candidate Screen', icon: Users },
+  { key: 'module4', label: 'Career Switch', icon: LayoutDashboard },
+];
+
+export default function App() {
+  const [activeModule, setActiveModule] = useState<ModuleKey>('home');
+
+  const ActiveModulePage = useMemo(() => {
+    switch (activeModule) {
+      case 'home':
+        return () => <LandingPage onSelectModule={(key) => setActiveModule(key as ModuleKey)} />;
+      case 'module1':
+        return Module1App;
+      case 'module5':
+        return Module5App;
+      case 'module2':
+        return Module2App;
+      case 'module3':
+        return Module3App;
+      case 'module4':
+        return Module4App;
+      default:
+        return () => <LandingPage onSelectModule={(key) => setActiveModule(key as ModuleKey)} />;
+    }
+  }, [activeModule]);
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC]">
+      {/* Integrated Navigation Bar */}
+      <header className="sticky top-0 z-[60] w-full border-b border-slate-200/60 bg-white/80 backdrop-blur-md shadow-sm">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+          <button
+            onClick={() => setActiveModule('home')}
+            className="flex items-center gap-2 group"
+          >
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700">
+              CareerAI
+            </span>
+          </button>
+
+          <nav className="hidden lg:flex items-center gap-1">
+            <button
+              onClick={() => setActiveModule('home')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${activeModule === 'home'
+                ? 'bg-blue-50 text-blue-600'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+            >
+              <Home className="w-4 h-4" />
+              <span>Dashboard</span>
+            </button>
+            <div className="w-px h-4 bg-slate-200 mx-2" />
+            {modules.map((module) => (
+              <button
+                key={module.key}
+                onClick={() => setActiveModule(module.key)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${activeModule === module.key
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+              >
+                <module.icon className="w-4 h-4" />
+                <span>{module.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-xs font-bold text-slate-600 uppercase tracking-tighter">AI Online</span>
+            </div>
+            <button className="lg:hidden p-2 rounded-lg bg-slate-100 text-slate-600">
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main className="relative">
+        <ActiveModulePage />
+      </main>
+
+      {/* Global Toast / Feedback area could go here */}
+    </div>
+  );
+}
