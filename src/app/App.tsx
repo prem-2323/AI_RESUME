@@ -5,7 +5,8 @@ import Module3App from '../modules/module3/App';
 import Module4App from '../modules/module4/App';
 import Module5App from '../modules/module5/ModuleIndex';
 import { LandingPage } from './components/LandingPage';
-import { Sparkles, Home, FileText, GraduationCap, Users, LayoutDashboard, ChevronRight, PenTool } from 'lucide-react';
+import { LoginPage } from './components/LoginPage';
+import { Sparkles, Home, FileText, GraduationCap, Users, LayoutDashboard, ChevronRight, PenTool, LogOut } from 'lucide-react';
 
 type ModuleKey = 'home' | 'module1' | 'module2' | 'module3' | 'module4' | 'module5';
 
@@ -19,6 +20,7 @@ const modules: Array<{ key: ModuleKey; label: string; icon: any }> = [
 
 export default function App() {
   const [activeModule, setActiveModule] = useState<ModuleKey>('home');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const ActiveModulePage = useMemo(() => {
     switch (activeModule) {
@@ -38,6 +40,10 @@ export default function App() {
         return () => <LandingPage onSelectModule={(key) => setActiveModule(key as ModuleKey)} />;
     }
   }, [activeModule]);
+
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={() => setIsLoggedIn(true)} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
@@ -88,6 +94,13 @@ export default function App() {
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               <span className="text-xs font-bold text-slate-600 uppercase tracking-tighter">AI Online</span>
             </div>
+            <button
+              onClick={() => setIsLoggedIn(false)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-red-50 hover:text-red-600 transition-all border border-transparent hover:border-red-100"
+              title="Logout"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
             <button className="lg:hidden p-2 rounded-lg bg-slate-100 text-slate-600">
               <ChevronRight className="w-5 h-5" />
             </button>
