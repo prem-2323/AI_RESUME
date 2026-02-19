@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+
 def extract_text_from_pdf(file):
     reader = PdfReader(file)
     text = ""
