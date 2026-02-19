@@ -1,36 +1,63 @@
-# Complete Frontend Website
+# AI Resume Analysis & Preparation Hub
 
-This folder contains one combined React + Vite frontend that includes all module pages:
-- Module 1: Resume Analyzer
-- Module 5: Interactive Resume Editor
-- Module 2: Smart Preparation Hub
-- Module 3: Resume Screening
-- Module 4: Career Domain Switch
+A full-stack application for resume analysis, interview preparation, and job matching.
 
-Use the top navigation in the app to switch between modules.
+## Project Structure
 
-## Run (Frontend Only)
+- `src/`: React + Vite frontend source code.
+- `backend/`: FastAPI backend implementation.
+- `complete/`: Root project configuration.
 
-```powershell
-cd complete
-npm install
-npm run dev
-```
+## Setup Instructions
 
-Open the URL printed by Vite (usually `http://localhost:5173`).
+### Frontend (Root Directory)
 
-## Build
+1.  **Install Dependencies:**
+    ```powershell
+    npm install
+    ```
+2.  **Environment Variables:**
+    Create a `.env` file based on `.env.example`:
+    ```env
+    VITE_API_BASE_URL=http://localhost:8000
+    ```
+3.  **Run Development Server:**
+    ```powershell
+    npm run dev
+    ```
 
-```powershell
-npm run build
-```
+### Backend (`/backend` Directory)
 
-## Optional API URL
+1.  **Navigate to Backend:**
+    ```powershell
+    cd backend
+    ```
+2.  **Create & Activate Virtual Environment:**
+    ```powershell
+    python -m venv venv
+    .\venv\Scripts\activate
+    ```
+3.  **Install Dependencies:**
+    ```powershell
+    pip install -r requirements.txt
+    ```
+4.  **Environment Variables:**
+    Create a `.env` file in the `backend/` folder based on `backend/.env.example`.
+5.  **Run Backend Server:**
+    ```powershell
+    python app.py
+    ```
 
-Some module pages call backend APIs. If needed, create a `.env` file in this `complete` folder:
+## Features
 
-```env
-VITE_API_BASE_URL=http://127.0.0.1:8000
-```
+- **Resume Analyzer**: Extract and analyze content from PDF resumes.
+- **Smart Preparation Hub**: AI-driven interview and career prep.
+- **Resume Screening**: Batch screening for candidates.
+- **Career Domain Switch**: Guidance on transitioning between career paths.
+- **Interactive Resume Editor**: Real-time editing and optimization.
 
-If no backend is running, the UI still loads (frontend only), but API-driven actions will fail at runtime.
+## Technologies Used
+
+- **Frontend**: React, Vite, Tailwind CSS, Lucide Icons.
+- **Backend**: Python, FastAPI, OpenRouter (LLM integration).
+- **Styling**: Modern, responsive UI with a premium dark/light mode aesthetic.
