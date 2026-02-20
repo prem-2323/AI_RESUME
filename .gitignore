@@ -8,9 +8,9 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
+
 venv/
-ENV/
+
 build/
 develop-eggs/
 dist/
@@ -72,11 +72,7 @@ output.txt
 output_dataframe.csv
 
 # FastAPI / Uvicorn reload files
-*.db
-*.sqlite
-.env
-.env.*
-!.env.example
+
 
 # Build outputs
 dist/
