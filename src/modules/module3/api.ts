@@ -82,7 +82,7 @@ export async function screenResumes({ files, jobRole, jobDescription }: ScreenRe
     formData.append('job_description', jobDescription.trim());
   }
 
-  const response = await fetch(`${API_BASE_URL}/analyze-resumes`, {
+  const response = await fetch(`${API_BASE_URL}/analyze-resumes?email=${localStorage.getItem('email')}`, {
     method: 'POST',
     body: formData,
   });

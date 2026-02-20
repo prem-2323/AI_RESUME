@@ -90,34 +90,28 @@ def analyze_resume_with_ai(resume_text, job_text):
         print("Invalid AI JSON:", content)
         raise Exception("AI returned invalid JSON format")
 
-    # Ensure data is a list of dicts with 'analysis' key
+    # If the AI returns a dict with 'analysis' key, use that
+    if isinstance(data, dict) and 'analysis' in data:
+        data = data['analysis']
+    
+    # If it's a list, just take the first item
+    if isinstance(data, list) and len(data) > 0:
+        data = data[0]
+        if isinstance(data, dict) and 'analysis' in data:
+            data = data['analysis']
+
+    # data should now be a dictionary with ats_score, etc.
     if isinstance(data, dict):
-        # If the AI returns a single dict with analysis keys, wrap in a list
-        if 'analysis' in data:
-            data = [data]
-        else:
-            # If the AI returns the analysis dict directly (no 'analysis' key)
-            data = [{"analysis": data}]
-    elif isinstance(data, list):
-        # If the list contains dicts without 'analysis' key, wrap them
-        if data and isinstance(data[0], dict) and 'analysis' not in data[0]:
-            data = [{"analysis": item} for item in data]
-
-    filtered_results = []
-
-    for item in data:
-        analysis = item["analysis"]
-        if int(analysis.get("ats_score", 0)) < 75 or int(analysis.get("skill_match_score", 0)) < 70:
-            filtered_results.append({
-                "mail": analysis.get("mail", "").replace(" ", ''),
-                "skills_missing": analysis.get("skills_missing", []),
-                "improvement_suggestions": analysis.get("improvement_suggestions", [])
-            })
-
-    try:
-        send_mail(filtered_results)
-    except Exception as e:
-        print(f"Mail sending failed (but continuing anyway): {e}")
+        if int(data.get("ats_score", 0)) < 75 or int(data.get("skill_match_score", 0)) < 70:
+            filtered_results = [{
+                "mail": data.get("mail", "").replace(" ", ''),
+                "skills_missing": data.get("skills_missing", []),
+                "improvement_suggestions": data.get("improvement_suggestions", [])
+            }]
+            try:
+                send_mail(filtered_results)
+            except Exception as e:
+                print(f"Mail sending failed: {e}")
 
     return data
 

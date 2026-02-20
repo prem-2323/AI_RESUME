@@ -71,20 +71,19 @@ export function UploadPage({ onStartScreening }: UploadPageProps) {
   return (
     <div className="min-h-screen bg-[#F8FAFC] py-8">
       <div className="max-w-6xl mx-auto px-6 space-y-8">
-        
+
         {/* Section 1: Multi Resume Upload Card */}
         <div className="bg-white rounded-2xl shadow-md p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Upload Candidate Resumes</h2>
-          
+
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all ${
-              isDragging 
-                ? 'border-[#2563EB] bg-blue-50' 
+            className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all ${isDragging
+                ? 'border-[#2563EB] bg-blue-50'
                 : 'border-gray-300 hover:border-[#2563EB] hover:bg-gray-50'
-            }`}
+              }`}
           >
             <input
               type="file"
@@ -135,7 +134,7 @@ export function UploadPage({ onStartScreening }: UploadPageProps) {
           )}
 
           {files.length > 0 && (
-            <Button 
+            <Button
               className="w-full mt-6 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] hover:opacity-90 text-white h-12 text-base rounded-xl shadow-lg"
               onClick={() => {
                 // Scroll to job role section
@@ -150,7 +149,7 @@ export function UploadPage({ onStartScreening }: UploadPageProps) {
         {/* Section 2: Job Role Selection */}
         <div id="job-role-section" className="bg-white rounded-2xl shadow-md p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Select Job Role for Screening</h2>
-          
+
           <div className="space-y-6">
             {/* Option 1: Dropdown */}
             <div>
@@ -162,14 +161,14 @@ export function UploadPage({ onStartScreening }: UploadPageProps) {
                   <SelectValue placeholder="Choose a job role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="frontend">Frontend Developer</SelectItem>
-                  <SelectItem value="backend">Backend Developer</SelectItem>
-                  <SelectItem value="fullstack">Full Stack Developer</SelectItem>
-                  <SelectItem value="devops">DevOps Engineer</SelectItem>
-                  <SelectItem value="data">Data Scientist</SelectItem>
-                  <SelectItem value="ml">Machine Learning Engineer</SelectItem>
-                  <SelectItem value="product">Product Manager</SelectItem>
-                  <SelectItem value="designer">UI/UX Designer</SelectItem>
+                  <SelectItem value="Frontend Developer">Frontend Developer</SelectItem>
+                  <SelectItem value="Backend Developer">Backend Developer</SelectItem>
+                  <SelectItem value="Full Stack Developer">Full Stack Developer</SelectItem>
+                  <SelectItem value="DevOps Engineer">DevOps Engineer</SelectItem>
+                  <SelectItem value="Data Scientist">Data Scientist</SelectItem>
+                  <SelectItem value="Machine Learning Engineer">Machine Learning Engineer</SelectItem>
+                  <SelectItem value="Product Manager">Product Manager</SelectItem>
+                  <SelectItem value="UI/UX Designer">UI/UX Designer</SelectItem>
                 </SelectContent>
               </Select>
             </div>

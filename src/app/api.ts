@@ -101,3 +101,19 @@ export async function screenResumes({ files, jobRole, jobDescription }: ScreenRe
   const data = (await response.json()) as AnalyzeResumeApiResponse[];
   return data.map(mapApiCandidate);
 }
+export async function registerUser(email: string): Promise<any> {
+  const response = await fetch(`${API_BASE_URL}/register-email`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: 'Failed to register user' }));
+    throw new Error(error.detail || 'Failed to register user');
+  }
+
+  return response.json();
+}

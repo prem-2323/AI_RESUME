@@ -82,7 +82,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/analyze`, {
+      const response = await fetch(`${API_BASE_URL}/analyze?email=${localStorage.getItem('email')}`, {
         method: 'POST',
         body: formData,
       });

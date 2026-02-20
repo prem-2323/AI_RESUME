@@ -149,7 +149,7 @@ function AppContent() {
     setError(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/phase4/career-switch`, {
+      const response = await fetch(`${API_BASE_URL}/phase4/career-switch?email=${localStorage.getItem('email')}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

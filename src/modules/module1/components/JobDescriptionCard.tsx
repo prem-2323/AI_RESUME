@@ -16,10 +16,10 @@ interface JobDescriptionCardProps {
 }
 
 const predefinedRoles = [
-  { value: 'frontend', label: 'Frontend Developer' },
-  { value: 'data-analyst', label: 'Data Analyst' },
-  { value: 'ai-engineer', label: 'AI Engineer' },
-  { value: 'backend', label: 'Backend Developer' },
+  { value: 'Frontend Developer', label: 'Frontend Developer' },
+  { value: 'Data Analyst', label: 'Data Analyst' },
+  { value: 'AI Engineer', label: 'AI Engineer' },
+  { value: 'Backend Developer', label: 'Backend Developer' },
 ];
 
 export function JobDescriptionCard({

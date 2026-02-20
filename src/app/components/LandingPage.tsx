@@ -31,8 +31,10 @@ const ToolCard = ({ title, description, icon, color, onClick, features }: ToolCa
     >
         <div className={`absolute top-0 right-0 w-32 h-32 -mr-8 -mt-8 bg-gradient-to-br ${color} opacity-10 rounded-full blur-3xl group-hover:opacity-20 transition-opacity`} />
 
-        <div className={`p-4 rounded-2xl bg-gradient-to-br ${color} mb-6 shadow-lg shadow-blue-500/20`}>
-            {React.cloneElement(icon as React.ReactElement, { className: "w-8 h-8 text-white" })}
+        <div className={`p-4 rounded-2xl bg-gradient-to-br ${color} mb-6 shadow-lg shadow-blue-500/20 text-white`}>
+            <div className="w-8 h-8">
+                {icon}
+            </div>
         </div>
 
         <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -93,8 +95,8 @@ export const LandingPage = ({ onSelectModule }: { onSelectModule: (key: string) 
                                 <Rocket className="w-5 h-5" />
                                 Explore Tools
                             </button>
-                            <button className="px-8 py-4 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white rounded-2xl font-bold text-lg border border-slate-200 dark:border-slate-800 transition-all">
-                                Learn More
+                            <button onClick={() => onSelectModule('premium')} className="px-8 py-4 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white rounded-2xl font-bold text-lg border border-slate-200 dark:border-slate-800 transition-all">
+                                Get Premium
                             </button>
                         </div>
                     </motion.div>
@@ -143,7 +145,7 @@ export const LandingPage = ({ onSelectModule }: { onSelectModule: (key: string) 
                         <ToolCard
                             title="AI Resume Analyzer"
                             description="Upload your resume and get instant feedback on how to optimize it for ATS systems and specific job roles."
-                            icon={<Search />}
+                            icon={<Search size={32} />}
                             color="from-blue-500 to-indigo-600"
                             onClick={() => onSelectModule('module1')}
                             features={[
@@ -156,7 +158,7 @@ export const LandingPage = ({ onSelectModule }: { onSelectModule: (key: string) 
                         <ToolCard
                             title="Interactive Resume Editor"
                             description="Craft your perfect resume with our intuitive builder. Choose templates and customize every detail with live preview."
-                            icon={<PenTool />}
+                            icon={<PenTool size={32} />}
                             color="from-rose-500 to-orange-600"
                             onClick={() => onSelectModule('module5')}
                             features={[
@@ -167,22 +169,35 @@ export const LandingPage = ({ onSelectModule }: { onSelectModule: (key: string) 
                             ]}
                         />
                         <ToolCard
+                            title="AI Mock Interview"
+                            description="Practice with our realistic AI interviewer. Get real-time questions, feedback, and a detailed performance report."
+                            icon={<Brain size={32} />}
+                            color="from-blue-600 to-cyan-500"
+                            onClick={() => onSelectModule('module7')}
+                            features={[
+                                "Dynamic AI Questions",
+                                "Real-time Feedback",
+                                "Comprehensive Scoring",
+                                "Skill-specific Analysis"
+                            ]}
+                        />
+                        <ToolCard
                             title="Smart Preparation Hub"
                             description="Get personalized interview questions and preparation strategies tailored to your target company and role."
-                            icon={<GraduationCap />}
+                            icon={<GraduationCap size={32} />}
                             color="from-emerald-500 to-teal-600"
                             onClick={() => onSelectModule('module2')}
                             features={[
-                                "Mock Interview Simulation",
+                                "Role-based Roadmaps",
                                 "Technical Question Bank",
                                 "Behavioral Guidance",
-                                "Feedback Analysis"
+                                "Company-specific Insights"
                             ]}
                         />
                         <ToolCard
                             title="Candidate Screener"
                             description="An enterprise-grade tool for HR professionals to quickly screen bulk resumes and identify top candidates."
-                            icon={<FileSearch />}
+                            icon={<FileSearch size={32} />}
                             color="from-amber-500 to-orange-600"
                             onClick={() => onSelectModule('module3')}
                             features={[
@@ -195,7 +210,7 @@ export const LandingPage = ({ onSelectModule }: { onSelectModule: (key: string) 
                         <ToolCard
                             title="Career Switch AI"
                             description="Planning a career change? Get a roadmap, skills gap analysis, and tailored project suggestions for your transition."
-                            icon={<SwitchCamera />}
+                            icon={<SwitchCamera size={32} />}
                             color="from-purple-500 to-pink-600"
                             onClick={() => onSelectModule('module4')}
                             features={[

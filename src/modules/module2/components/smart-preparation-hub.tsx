@@ -93,7 +93,8 @@ export function SmartPreparationHub() {
       let data: GeneratedData;
 
       if (selectedMode === 'job-role') {
-        const response = await fetch(`${API_BASE_URL}/phase1/role-roadmap`, {
+        const email = localStorage.getItem('email') || 'guest@example.com';
+        const response = await fetch(`${API_BASE_URL}/phase1/role-roadmap?email=${encodeURIComponent(email)}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ role: selectedRole }),
@@ -110,7 +111,7 @@ export function SmartPreparationHub() {
           prediction: String(result.future_prediction ?? 'No future prediction available.'),
         };
       } else if (selectedMode === 'job-description') {
-        const response = await fetch(`${API_BASE_URL}/phase2/analyze-jd`, {
+        const response = await fetch(`${API_BASE_URL}/phase2/analyze-jd?email=${encodeURIComponent(localStorage.getItem('email') || 'guest@example.com')}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ job_description: jobDescription }),
@@ -127,7 +128,7 @@ export function SmartPreparationHub() {
           prediction: `Interview focus: ${normalizeList(result.interview_focus_areas).join(', ') || 'Not provided'}. Suggested projects: ${normalizeList(result.suggested_projects).join(', ') || 'Not provided'}.`,
         };
       } else if (selectedMode === 'company-role') {
-        const response = await fetch(`${API_BASE_URL}/phase3/company-role-analysis`, {
+        const response = await fetch(`${API_BASE_URL}/phase3/company-role-analysis?email=${encodeURIComponent(localStorage.getItem('email') || 'guest@example.com')}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ company_name: companyName, job_role: roleName }),
